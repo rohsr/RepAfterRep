@@ -21,11 +21,15 @@ export default function Coach() {
   };
 
   return (
-    <div className="coach">
+    <div className="coach" data-reveal>
       <header className="page-head">
         <div>
           <p className="eyebrow">Coach</p>
           <h1 className="display page-title">Jordan</h1>
+          <p className="status">
+            <span className="live-dot" aria-hidden="true" />
+            Online now
+          </p>
         </div>
       </header>
 

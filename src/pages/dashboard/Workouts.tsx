@@ -96,7 +96,7 @@ export default function Workouts() {
   };
 
   return (
-    <div className="workouts">
+    <div className="workouts" data-reveal>
       <header className="page-head">
         <div>
           <p className="eyebrow">Workouts</p>

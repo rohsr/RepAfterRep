@@ -2,12 +2,14 @@ import { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 import Modal from '../components/Modal';
+import useScrolled from '../hooks/useScrolled';
 import { pillars, tiers, wins } from '../data';
 
 export default function Marketing() {
   const [openTier, setOpenTier] = useState(0);
   const [pillar, setPillar] = useState<number | null>(null);
   const closePillar = useCallback(() => setPillar(null), []);
+  const scrolled = useScrolled();
   const active = pillar === null ? null : pillars[pillar];
 
   return (
@@ -16,7 +18,7 @@ export default function Marketing() {
         Skip to content
       </a>
 
-      <header className="nav dark">
+      <header className={`nav dark ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="wrap nav-inner">
           <Logo />
           <nav className="nav-links" aria-label="Main">
@@ -26,7 +28,7 @@ export default function Marketing() {
             <a href="#results">Transformations</a>
           </nav>
           <div className="nav-right">
-            <Link to="/login" className="ghost">
+            <Link to="/login" className="ghost nav-ghost">
               Client Login
             </Link>
             <Link to="/subscribe" className="pill">
@@ -60,7 +62,7 @@ export default function Marketing() {
         </section>
 
         <section className="philosophy light" id="philosophy">
-          <div className="wrap philosophy-grid">
+          <div className="wrap philosophy-grid" data-reveal>
             <span className="star big">✦</span>
             <div>
               <h2 className="display philosophy-title">Discipline in the gym. Momentum in life.</h2>
@@ -79,13 +81,13 @@ export default function Marketing() {
 
         <section className="block dark" id="programs">
           <div className="wrap">
-            <div className="section-head">
+            <div className="section-head" data-reveal>
               <h2 className="display section-title">The Pillars</h2>
               <a href="#programs" className="see-all">
                 Explore all <span aria-hidden="true">→</span>
               </a>
             </div>
-            <div className="pillars">
+            <div className="pillars" data-reveal>
               {pillars.map((p, i) => (
                 <button key={p.title} className="pillar" onClick={() => setPillar(i)}>
                   <span className="pillar-no">0{i + 1}</span>
@@ -103,7 +105,7 @@ export default function Marketing() {
         </section>
 
         <section className="block light" id="tiers">
-          <div className="wrap">
+          <div className="wrap" data-reveal>
             <p className="eyebrow section-label">Coaching Tiers</p>
             {tiers.map((t, i) => {
               const isOpen = openTier === i;
@@ -139,7 +141,7 @@ export default function Marketing() {
         </section>
 
         <section className="closing green" id="results">
-          <div className="wrap">
+          <div className="wrap" data-reveal>
             <span className="star big">✦</span>
             <h2 className="display closing-title">
               Your body is
@@ -167,7 +169,7 @@ export default function Marketing() {
       </main>
 
       <footer id="apply" className="footer dark">
-        <div className="wrap footer-inner">
+        <div className="wrap footer-inner" data-reveal>
           <Logo />
           <div className="footer-meta">
             <span>© 2026 RepAfterRep. Fitness • Nutrition • Lifestyle.</span>

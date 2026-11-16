@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Preloader from './components/Preloader';
+import ScrollProgress from './components/ScrollProgress';
 import Marketing from './pages/Marketing';
 import Login from './pages/Login';
 import Subscribe from './pages/Subscribe';
@@ -11,12 +12,15 @@ import Nutrition from './pages/dashboard/Nutrition';
 import Progress from './pages/dashboard/Progress';
 import Coach from './pages/dashboard/Coach';
 import { isAuthed } from './auth';
+import useReveal from './hooks/useReveal';
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   return isAuthed() ? children : <Navigate to="/login" replace />;
 }
 
 export default function App() {
+  const location = useLocation();
+  useReveal();
   const [booting, setBooting] = useState(() => !sessionStorage.getItem('rap-booted'));
   const finishBoot = useCallback(() => {
     sessionStorage.setItem('rap-booted', '1');
@@ -26,6 +30,8 @@ export default function App() {
   return (
     <>
       {booting && <Preloader onDone={finishBoot} />}
+      <ScrollProgress />
+      <div key={location.pathname} className="page-enter">
       <Routes>
         <Route path="/" element={<Marketing />} />
         <Route path="/login" element={<Login />} />
@@ -46,6 +52,7 @@ export default function App() {
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </div>
     </>
   );
 }

@@ -70,7 +70,7 @@ export default function Nutrition() {
   const extra = entries.reduce((sum, en) => sum + en.kcal, 0);
 
   return (
-    <div className="nutrition">
+    <div className="nutrition" data-reveal>
       <header className="page-head">
         <div>
           <p className="eyebrow">Nutrition</p>

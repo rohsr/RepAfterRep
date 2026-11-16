@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
+import useScrolled from '../hooks/useScrolled';
 import { compareRows, compareValues, faqs, plans } from '../data';
 
 type Billing = 'monthly' | 'annual';
@@ -10,6 +11,7 @@ export default function Subscribe() {
   const [chosen, setChosen] = useState<string | null>(null);
 
   const chosenPlan = plans.find((p) => p.id === chosen) ?? null;
+  const scrolled = useScrolled();
 
   return (
     <>
@@ -17,7 +19,7 @@ export default function Subscribe() {
         Skip to content
       </a>
 
-      <header className="nav dark">
+      <header className={`nav dark ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="wrap nav-inner">
           <Logo />
           <nav className="nav-links" aria-label="Subscriptions">
@@ -27,7 +29,7 @@ export default function Subscribe() {
             <a href="#faq">FAQ</a>
           </nav>
           <div className="nav-right">
-            <Link to="/login" className="ghost">
+            <Link to="/login" className="ghost nav-ghost">
               Client Login
             </Link>
           </div>
@@ -56,7 +58,7 @@ export default function Subscribe() {
 
         <section className="block light" id="plans">
           <div className="wrap">
-            <div className="plan-grid">
+            <div className="plan-grid" data-reveal>
               {plans.map((p) => {
                 const price = billing === 'monthly' ? p.monthly : p.annual;
                 const selected = chosen === p.id;
@@ -114,7 +116,7 @@ export default function Subscribe() {
             <div className="section-head">
               <h2 className="display section-title">Compare</h2>
             </div>
-            <div className="table-scroll">
+            <div className="table-scroll" data-reveal>
               <table className="compare">
                 <thead>
                   <tr>
@@ -154,7 +156,7 @@ export default function Subscribe() {
         <section className="block light" id="faq">
           <div className="wrap faq-grid">
             <h2 className="display section-title">Questions</h2>
-            <div className="faq-list">
+            <div className="faq-list" data-reveal>
               {faqs.map((f) => (
                 <details key={f.q} className="faq">
                   <summary>{f.q}</summary>

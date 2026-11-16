@@ -45,13 +45,16 @@ export default function Overview() {
   const lost = (weights[0] - weights[weights.length - 1]).toFixed(1);
 
   return (
-    <div className="overview">
+    <div className="overview" data-reveal>
       <header className="page-head">
         <div>
           <p className="eyebrow">Overview</p>
           <h1 className="display page-title">Welcome back, Alex</h1>
         </div>
-        <span className="streak">42-day streak</span>
+        <span className="streak">
+          <span className="live-dot" aria-hidden="true" />
+          42-day streak
+        </span>
       </header>
 
       <div className="kpis">

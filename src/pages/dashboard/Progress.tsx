@@ -47,7 +47,7 @@ export default function Progress() {
   const liftGain = (liftValues[liftValues.length - 1] - liftValues[0]).toFixed(1);
 
   return (
-    <div className="progress">
+    <div className="progress" data-reveal>
       <header className="page-head">
         <div>
           <p className="eyebrow">Progress</p>
