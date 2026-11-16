@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Preloader from './components/Preloader';
 import ScrollProgress from './components/ScrollProgress';
@@ -21,6 +21,9 @@ function RequireAuth({ children }: { children: JSX.Element }) {
 export default function App() {
   const location = useLocation();
   useReveal();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   const [booting, setBooting] = useState(() => !sessionStorage.getItem('rap-booted'));
   const finishBoot = useCallback(() => {
     sessionStorage.setItem('rap-booted', '1');
